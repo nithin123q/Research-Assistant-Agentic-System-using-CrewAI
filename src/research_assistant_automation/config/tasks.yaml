@@ -1,0 +1,39 @@
+---
+find_research_sources:
+  description: Search for 3-5 high-quality, credible sources related to {research_topic}.
+    Use multiple search queries to ensure comprehensive coverage. Look for academic
+    papers, peer-reviewed articles, reputable news sources, and authoritative websites.
+    For each source, provide the title, URL, and a brief description of its relevance
+    to the research topic.
+  expected_output: A list of 3-5 sources with title, URL, and relevance description
+    for each source related to {research_topic}. Each source should be from a credible,
+    authoritative publication or website.
+  agent: research_specialist
+analyze_source_content:
+  description: Visit each source from the research list and extract detailed content
+    about {research_topic}. Analyze the key findings, methodologies, conclusions,
+    and important data points from each source. Identify common themes, conflicting
+    viewpoints, and gaps in the research. Create a comprehensive analysis that synthesizes
+    information across all sources.
+  expected_output: 'A detailed content analysis including: key findings from each
+    source, main themes and patterns, conflicting viewpoints, research gaps, and a
+    synthesis of the most important insights about {research_topic}.'
+  agent: content_analyst
+  context:
+  - find_research_sources
+create_research_report:
+  description: 'Create a comprehensive research report about {{ research_topic }}
+    using the findings from the source analysis. Structure the report with clear sections
+    including: Executive Summary, Introduction, Key Findings, Analysis & Discussion,
+    Conclusions, and References.
+
+    '
+  expected_output: 'A professional research report in markdown format about {{ research_topic
+    }} including Executive Summary, Introduction, Key Findings, Analysis and Discussion,
+    Conclusions, and a References section.
+
+    '
+  agent: research_report_writer
+  context:
+  - find_research_sources
+  - analyze_source_content
